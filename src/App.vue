@@ -1,20 +1,38 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
-</template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Vue from 'vue'
+import axios from 'axios'
+import Valorant from './components/Valorant.vue'
 
-export default {
+Vue.component('app', Valorant);
+
+new Vue({
+  el: '#app',
+  data () {
+    return {
+      msg: 'Sample text'
+    }
+  },
+  mounted () {
+    axios
+      .get('https://jsonplaceholder.typicode.com/posts')
+      .then(response => (console.log(response.data)))
+  },
   name: 'App',
   components: {
-    HelloWorld
+    Valorant
   }
-}
+})
+
+export default Vue;
 </script>
+
+<template>
+  <body>
+    <div id="app">
+      <Valorant msg="Welcome to Your Vue.js App"/>
+    </div>
+  </body>
+</template>
 
 <style>
 #app {
